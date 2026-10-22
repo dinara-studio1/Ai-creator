@@ -7,7 +7,6 @@ orders.json
 clients.json
 products.json
 data/
-uploads/
 *.sqlite
 *.sqlite-wal
 *.sqlite-shm
