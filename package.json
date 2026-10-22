@@ -1,0 +1,25 @@
+{
+  "name": "dinara-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Сайт Динары + AI-чат Асель",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "start": "node server.js",
+    "check:ai": "node ai/check.js",
+    "preview": "vite preview"
+  },
+  "engines": {
+    "node": ">=22.13"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.5.2",
+    "vite": "^6.3.5"
+  }
+}

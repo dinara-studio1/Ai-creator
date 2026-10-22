@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Динара — AI Video Creator. Создаю видео с помощью искусственного интеллекта." />
+  <title>Динара — AI Video Creator</title>
+  <meta name="theme-color" content="#13242e" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ru_RU" />
+  <meta property="og:site_name" content="Динара — AI Video Creator" />
+  <meta property="og:title" content="Динара — AI Video Creator" />
+  <meta property="og:description" content="AI-видео для бизнеса, детских праздников, скетчей и соцсетей. Заказ в пару кликов через WhatsApp или Telegram." />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23e8a53a'/%3E%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-size='34' font-weight='700' text-anchor='middle' fill='%231a2a32'%3E%D0%94%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=42" />
+</head>
+<body>
+  <header class="top">
+    <a class="logo" href="#top">Динара</a>
+    <div class="top__right">
+      <nav class="nav" aria-label="Основная навигация">
+        <a href="#about">Обо мне</a>
+        <a href="#directions">Услуги</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="#contact">Контакт</a>
+      </nav>
+      <button type="button" class="cart-btn" id="cart-open" aria-label="Открыть корзину">
+        <span class="cart-btn__icon" aria-hidden="true">🛒</span>
+        <span class="cart-btn__label">Корзина</span>
+        <span class="cart-btn__count" id="cart-count" hidden>0</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="stage">
+      <div class="stage__visual" aria-hidden="true">
+        <picture>
+          <source srcset="photo.webp?v=11" type="image/webp" />
+          <img
+            class="stage__photo"
+            src="photo.jpg?v=11"
+            alt=""
+            width="1920"
+            height="1080"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </picture>
+      </div>
+
+      <section class="hero" aria-label="Главный экран">
+        <div class="hero__content wrap">
+          <div class="hero__copy">
+            <h1 class="hero__headline">
+              <span class="hero__brand">Динара</span>
+              <span class="hero__role">AI Video Creator</span>
+            </h1>
+            <p class="hero__lead">
+              Воплощаю любые идеи в ИИ-формате —<br />
+              от персональных праздников до коммерческого продвижения под ключ.
+            </p>
+          </div>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#contact">Написать мне</a>
+            <a class="btn btn--ghost" href="#directions">Смотреть услуги</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="about" id="about">
+        <div class="about__bg" aria-hidden="true">
+          <picture>
+            <source srcset="about-bg.webp?v=2" type="image/webp" />
+            <img src="about-bg.jpg?v=2" alt="" width="1920" height="1080" loading="lazy" />
+          </picture>
+        </div>
+        <div class="about__inner">
+          <p class="section-kicker">Обо мне</p>
+          <div class="about__grid">
+            <h2 class="section-title">Истории, где идея человека<br />встречается с&nbsp;ИИ</h2>
+            <div class="about__body">
+              <p>
+                Мне 46. Я делаю видео с помощью искусственного интеллекта:
+                от идеи и визуала до готового ролика.
+              </p>
+              <p>
+                Важно, чтобы зритель чувствовал смысл, а не «сгенерированный»
+                шаблон — поэтому в каждом кадре оставляю живой характер.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="work directions" id="directions">
+      <div class="wrap">
+        <p class="section-kicker">Направления</p>
+        <h2 class="section-title section-title--wide">Услуги</h2>
+        <p class="work__intro">
+          Четыре формата, в которых я работаю чаще всего — от бизнеса до детских и подростковых историй.
+        </p>
+        <div class="directions__list">
+          <article class="dir-card">
+            <h3 class="dir-card__title">Для бизнеса и гастробрендов</h3>
+            <p class="dir-card__text">
+              Ролик, после которого хочется зайти, заказать и вернуться.
+              Показываю продукт, атмосферу и вкус без съёмочной группы
+              и долгого производства.
+            </p>
+          </article>
+          <article class="dir-card">
+            <h3 class="dir-card__title">Скетчи / мини-сериалы</h3>
+            <p class="dir-card__text">
+              Короткие сценки с персонажем, который говорит как клиент:
+              сомнения, выбор, «брать или нет». Запоминается лучше обычной
+              рекламы и легко собирается в серию.
+            </p>
+          </article>
+          <article class="dir-card">
+            <h3 class="dir-card__title">Детские праздники</h3>
+            <p class="dir-card__text">
+              Ребёнок становится героем своего мультфильма: день рождения,
+              супергерой или сказка. Ролик, который родители сохраняют
+              и пересылают.
+            </p>
+          </article>
+          <article class="dir-card">
+            <h3 class="dir-card__title">Подростковый контент</h3>
+            <p class="dir-card__text">
+              Ролики про стиль, характер и «уже не ребёнок».
+              Не детская сказка и не взрослая реклама — контент,
+              который подростки досматривают до конца.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="shop" id="shop">
+      <div class="wrap">
+        <p class="section-kicker">Каталог</p>
+        <h2 class="section-title">Выбери формат</h2>
+        <div class="shop__grid" id="shop-grid" data-limit="3"></div>
+        <div class="shop__more">
+          <a class="btn btn--primary" href="catalog.html">Смотреть все услуги</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="wrap">
+        <p class="section-kicker">Контакт</p>
+        <h2 class="section-title">Напишите — обсудим ролик</h2>
+        <p class="contact__text">
+          Расскажите задачу и аудиторию. Отвечу и предложу простой формат.
+        </p>
+        <ul class="contact__list">
+          <li>
+            <span>WhatsApp</span>
+            <a href="https://wa.me/77003096823" target="_blank" rel="noopener noreferrer">87003096823</a>
+          </li>
+          <li>
+            <span>Telegram</span>
+            <a href="https://t.me/TDS_dinara" target="_blank" rel="noopener noreferrer">@TDS_dinara</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap wrap--foot">
+      <span>Динара</span>
+    </div>
+  </footer>
+
+  <div class="cart-drawer" id="cart-drawer" hidden>
+    <button type="button" class="cart-drawer__backdrop" id="cart-close-backdrop" aria-label="Закрыть корзину"></button>
+    <aside class="cart-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+      <div class="cart-drawer__head">
+        <h2 id="cart-title">Корзина</h2>
+        <button type="button" class="cart-drawer__close" id="cart-close" aria-label="Закрыть">×</button>
+      </div>
+      <div class="cart-drawer__body" id="cart-list"></div>
+      <div class="cart-drawer__foot" id="cart-foot" hidden>
+        <p class="cart-drawer__total">Итого: <strong id="cart-total"></strong></p>
+        <button type="button" class="btn btn--primary cart-drawer__checkout" id="cart-checkout">Оформить заказ</button>
+        <button type="button" class="btn btn--ghost-dark cart-drawer__clear" id="cart-clear">Очистить корзину</button>
+      </div>
+    </aside>
+  </div>
+
+  <div class="order-modal" id="order-modal" hidden>
+    <div class="order-modal__panel" role="dialog" aria-modal="true" aria-labelledby="order-modal-title">
+      <button type="button" class="order-modal__close" id="order-modal-close" aria-label="Закрыть">×</button>
+      <h3 id="order-modal-title">Оформление заказа</h3>
+      <p class="order-modal__text">Оставьте имя и телефон. Заказ сохранится, и откроется чат с Динарой.</p>
+      <ul class="order-modal__summary" id="order-summary"></ul>
+      <p class="order-modal__total" id="order-total"></p>
+      <form id="order-form" class="order-form">
+        <label class="order-field">
+          Имя
+          <input type="text" id="order-name" name="name" required maxlength="80" autocomplete="name" placeholder="Как к вам обращаться" />
+        </label>
+        <label class="order-field">
+          Телефон с кодом страны
+          <span class="order-phone">
+            <span class="order-phone__plus" aria-hidden="true">+</span>
+            <input type="tel" id="order-phone" name="phone" required maxlength="19" autocomplete="tel" inputmode="numeric" placeholder="7 700 000 00 00" aria-label="Номер телефона с кодом страны" />
+          </span>
+        </label>
+        <p class="order-form__error" id="order-error" hidden></p>
+        <div class="order-modal__actions">
+          <button type="submit" class="btn btn--primary" data-channel="whatsapp">WhatsApp</button>
+          <button type="submit" class="btn btn--tg" data-channel="telegram">Telegram</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="products-data.js?v=13"></script>
+  <script src="script.js?v=28"></script>
+  <script src="chat-widget.js?v=19"></script>
+</body>
+</html>

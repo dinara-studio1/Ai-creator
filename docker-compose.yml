@@ -1,0 +1,22 @@
+services:
+  site:
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      HOST: 0.0.0.0
+      PORT: "3000"
+      DATA_DIR: /data
+      DB_FILENAME: dinara.sqlite
+      CHROME_PATH: /usr/bin/chromium
+      CHROME_NO_SANDBOX: "true"
+    volumes:
+      - site-data:/data
+      - site-uploads:/app/uploads
+    restart: unless-stopped
+
+volumes:
+  site-data:
+  site-uploads:

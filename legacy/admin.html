@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Админка — Динара</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23e8a53a'/%3E%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-size='34' font-weight='700' text-anchor='middle' fill='%231a2a32'%3E%D0%94%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=42" />
+  <link rel="stylesheet" href="admin.css?v=36" />
+</head>
+<body class="admin-page">
+  <header class="admin-top">
+    <a class="admin-back" href="index.html">← На сайт</a>
+    <div class="admin-top__right">
+      <button type="button" class="admin-back" id="admin-logout" hidden>Выйти</button>
+      <span class="admin-top__title">Админка</span>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <section id="login-box" class="admin-login">
+      <h1 class="admin-login__title">Вход</h1>
+      <p class="admin-login__lead">
+        Услуги на сайте и заказы клиентов.
+      </p>
+      <form id="login-form" class="admin-form admin-form--login">
+        <div class="admin-field">
+          <label for="admin-pass">Пароль</label>
+          <div class="pass-field">
+            <input type="password" id="admin-pass" required autocomplete="current-password" />
+            <button
+              type="button"
+              class="pass-toggle"
+              id="pass-toggle"
+              aria-label="Показать пароль"
+              title="Показать пароль"
+            >👁</button>
+          </div>
+        </div>
+        <button type="submit" class="btn btn--primary admin-login__btn">Войти</button>
+        <p id="login-error" class="admin-error" hidden>Неверный пароль</p>
+      </form>
+      <script>
+        (function () {
+          var btn = document.getElementById("pass-toggle");
+          var input = document.getElementById("admin-pass");
+          if (!btn || !input) return;
+          btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var show = input.type === "password";
+            input.type = show ? "text" : "password";
+            btn.classList.toggle("is-open", show);
+            btn.textContent = show ? "🙈" : "👁";
+            btn.setAttribute("aria-label", show ? "Скрыть пароль" : "Показать пароль");
+            btn.title = show ? "Скрыть пароль" : "Показать пароль";
+          });
+        })();
+      </script>
+    </section>
+
+    <section id="admin-panel" class="admin-panel wrap" hidden>
+      <nav class="admin-tabs" aria-label="Разделы админки">
+        <button type="button" class="admin-tab is-active" data-admin-tab="products">Услуги</button>
+        <button type="button" class="admin-tab" data-admin-tab="orders">
+          Заказы
+          <span class="admin-tab__badge" id="orders-new-badge" hidden>0</span>
+        </button>
+        <button type="button" class="admin-tab" data-admin-tab="clients">Клиенты</button>
+      </nav>
+
+      <div class="admin-card" id="products-card">
+        <div class="admin-card__head">
+          <h2>Услуги на сайте</h2>
+          <div class="admin-card__actions">
+            <button type="button" class="btn btn--primary" id="add-product-btn">Добавить товар</button>
+            <button type="button" class="btn btn--ghost-dark" id="reset-btn">Сбросить к 6 демо</button>
+          </div>
+        </div>
+        <div id="admin-list" class="admin-list"></div>
+      </div>
+
+      <div class="admin-card" id="orders-card" hidden>
+        <div class="admin-card__head">
+          <h2>Заказы</h2>
+          <div class="admin-card__actions">
+            <label class="orders-search">
+              <span class="visually-hidden">Поиск заказа</span>
+              <input type="search" id="orders-search" placeholder="Имя, телефон или №" autocomplete="off" />
+            </label>
+            <label class="orders-filter">
+              <span class="visually-hidden">Статус</span>
+              <select id="orders-filter">
+                <option value="all">Все статусы</option>
+                <option value="new">Новые</option>
+                <option value="progress">В работе</option>
+                <option value="done">Готово</option>
+                <option value="cancelled">Отменённые</option>
+              </select>
+            </label>
+            <button type="button" class="btn btn--ghost-dark" id="orders-refresh">Обновить</button>
+          </div>
+        </div>
+        <div class="orders-stats" id="orders-stats"></div>
+        <div id="orders-list" class="orders-list"></div>
+      </div>
+
+      <div class="admin-card" id="clients-card" hidden>
+        <div class="admin-card__head">
+          <h2>Клиенты</h2>
+          <button type="button" class="btn btn--ghost-dark" id="clients-refresh">Обновить</button>
+        </div>
+        <p class="clients-lead">Один номер телефона — один клиент. Новый заказ с тем же номером обновляет карточку, а не создаёт дубль.</p>
+        <div id="clients-list" class="clients-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="product-modal" id="product-modal" hidden>
+    <button type="button" class="product-modal__backdrop" id="product-modal-backdrop" aria-label="Закрыть"></button>
+    <div class="product-modal__panel" role="dialog" aria-modal="true" aria-labelledby="product-modal-title">
+      <div class="product-modal__head">
+        <h2 id="product-modal-title">Добавить товар</h2>
+        <button type="button" class="product-modal__x" id="product-modal-close" aria-label="Закрыть">×</button>
+      </div>
+      <form id="product-form" class="admin-form">
+        <input type="hidden" id="edit-id" value="" />
+        <label>
+          Название
+          <input type="text" id="f-title" required maxlength="80" />
+        </label>
+        <label>
+          Тип
+          <select id="f-kind" required>
+            <option value="product">Товар</option>
+            <option value="service">Услуга</option>
+          </select>
+        </label>
+        <label>
+          Описание
+          <textarea id="f-desc" required rows="3" maxlength="280"></textarea>
+        </label>
+        <div class="admin-price">
+          <label class="admin-price__amount">
+            Цена
+            <input type="text" id="f-price" required maxlength="11" inputmode="numeric" placeholder="15000" />
+          </label>
+          <label class="admin-price__currency">
+            Валюта
+            <select id="f-currency" required>
+              <option value="kzt">Тенге ₸</option>
+              <option value="usd">Доллар $</option>
+              <option value="rub">Рубли ₽</option>
+            </select>
+          </label>
+        </div>
+        <div class="admin-media">
+          <span class="admin-media__label">Фото или видео</span>
+          <input type="hidden" id="f-image" value="" />
+          <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Выберите или перетащите фото">
+            <input
+              type="file"
+              id="f-file"
+              accept="image/jpeg,image/png,image/webp,image/gif,video/mp4"
+              hidden
+            />
+            <div class="dropzone__empty" id="dropzone-empty">
+              <strong>Выберите или перетащите фото</strong>
+              <span>JPG, PNG, WEBP, GIF или MP4 до 3 МБ</span>
+            </div>
+            <div class="dropzone__preview" id="dropzone-preview" hidden>
+              <img id="dropzone-img" alt="" hidden />
+              <video id="dropzone-video" muted playsinline controls hidden></video>
+              <button type="button" class="dropzone__clear" id="dropzone-clear" aria-label="Убрать файл">×</button>
+            </div>
+          </div>
+          <p class="admin-hint">После выбора фото откроется окно: сетка, сдвиг и превью карточки на сайте.</p>
+        </div>
+        <div class="admin-form__actions">
+          <button type="submit" class="btn btn--primary" id="save-btn">Добавить</button>
+          <button type="button" class="btn btn--ghost-dark" id="cancel-edit">Отмена</button>
+          <button type="button" class="btn btn--ghost-dark admin-form__crop" id="dropzone-edit" hidden>Настроить кадр</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="crop-modal" id="crop-modal" hidden>
+    <div class="crop-modal__panel" role="dialog" aria-modal="true" aria-labelledby="crop-title">
+      <div class="crop-modal__head">
+        <h2 id="crop-title">Настройка фото</h2>
+        <button type="button" class="crop-modal__x" id="crop-cancel-x" aria-label="Закрыть">×</button>
+      </div>
+      <div class="crop-modal__grid">
+        <div class="crop-modal__editor">
+          <p class="crop-modal__hint">Перетащите фото. Сетка — как на карточке каталога (16:10).</p>
+          <div class="crop-stage" id="crop-stage">
+            <img id="crop-image" alt="" draggable="false" />
+            <div class="crop-stage__grid" aria-hidden="true"></div>
+            <div class="crop-stage__profile" aria-hidden="true"></div>
+          </div>
+          <label class="crop-zoom">
+            <span>Масштаб</span>
+            <input type="range" id="crop-zoom" min="100" max="250" value="100" />
+          </label>
+          <div class="crop-presets">
+            <button type="button" class="btn btn--ghost-dark" data-crop-preset="center">По центру</button>
+            <button type="button" class="btn btn--ghost-dark" data-crop-preset="top">Лицо сверху</button>
+            <button type="button" class="btn btn--ghost-dark" data-crop-preset="reset">Сбросить</button>
+          </div>
+        </div>
+        <div class="crop-modal__preview">
+          <p class="crop-modal__hint">Как будет на сайте</p>
+          <article class="crop-card-preview">
+            <div class="crop-card-preview__media">
+              <canvas id="crop-preview-canvas" width="480" height="300"></canvas>
+            </div>
+            <div class="crop-card-preview__body">
+              <span class="product-card__kind">Превью</span>
+              <strong id="crop-preview-title">Название товара</strong>
+              <span class="crop-card-preview__price" id="crop-preview-price">0 ₸</span>
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="crop-modal__actions">
+        <button type="button" class="btn btn--ghost-dark" id="crop-cancel">Отмена</button>
+        <button type="button" class="btn btn--primary" id="crop-apply">Применить кадр</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="products-data.js?v=13"></script>
+  <script src="admin.js?v=38"></script>
+</body>
+</html>
